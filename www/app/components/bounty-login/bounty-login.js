@@ -1,46 +1,51 @@
-Polymer('bounty-login', {
-    login: function () {
-        var googleAuthUrl = 'https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/plus.login&redirect_uri=http://localhost&response_type=code&client_id=947746537625-ff7208jd2piqpa0450u4vrt70blckl3m.apps.googleusercontent.com',
-            loginWindow = window.open(googleAuthUrl, '_blank', 'location=yes'),
-            that = this;
+(function () {
+    'use strict';
 
-        loginWindow.addEventListener('loadstart', function (event) {
-            // First, parse the query string
-            var params = {},
-                queryString = event.url.slice(event.url.indexOf('?') + 1),
-                regex = /([^&=]+)=([^&]*)/g,
-                m;
+    /*global Polymer*/
+    Polymer('bounty-login', {
+        login: function () {
+            var googleAuthUrl = 'https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/plus.login&redirect_uri=http://localhost&response_type=code&client_id=947746537625-ff7208jd2piqpa0450u4vrt70blckl3m.apps.googleusercontent.com',
+                loginWindow = window.open(googleAuthUrl, '_blank', 'location=yes'),
+                that = this;
 
-            while (m = regex.exec(queryString)) {
-                params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-            }
+            loginWindow.addEventListener('loadstart', function (event) {
+                // First, parse the query string
+                var params = {},
+                    queryString = event.url.slice(event.url.indexOf('?') + 1),
+                    regex = /([^&=]+)=([^&]*)/g,
+                    m;
 
-            if (params.error) {
-                // handle the error
-                return;
-            }
+                while (m = regex.exec(queryString)) {
+                    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                }
 
-            if (params.code) {
-                that.code = params.code;
-                loginWindow.close();
+                if (params.error) {
+                    // handle the error
+                    return;
+                }
 
-                that.$.googleAccess.go();
-            }
-        });
-    },
+                if (params.code) {
+                    that.code = params.code;
+                    loginWindow.close();
 
-    tokenHandler: function (event) {
-        this.access_token = event.detail.response.access_token;
+                    that.$.googleAccess.go();
+                }
+            });
+        },
 
-        /*
-         * save the access token to local storage
-         */
-        localStorage.setItem('access_token', this.access_token);
+        tokenHandler: function (event) {
+            this.access_token = event.detail.response.access_token;
 
-        this.$.googleProfile.go();
-    },
+            /*
+             * save the access token to local storage
+             */
+            localStorage.setItem('access_token', this.access_token);
 
-    responseHandler: function (event) {
-        this.fire('logged-in');
-    }
-});
+            this.$.googleProfile.go();
+        },
+
+        responseHandler: function () {
+            this.fire('logged-in');
+        }
+    });
+}());
