@@ -1,0 +1,17 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="bounty-bounty" attributes="bounty">
+    <template>
+        <paper-icon-button icon="arrow-back" on-tap="{{goBack}}"></paper-icon-button>
+
+        <p>This is the bounty</p>
+        <div hero-id="bounty" hero>{{bounty.name}}</div>
+        <p>Value: {{bounty.value}}</p>
+        <paper-button raised on-tap="{{accept}}">Accept Bounty</paper-button>
+    </template>
+
+    <script src="bounty-bounty.js"></script>
+</polymer-element>

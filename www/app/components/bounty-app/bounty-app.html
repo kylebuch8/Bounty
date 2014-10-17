@@ -1,14 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
-<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../components/bounty-login/bounty-login.html">
 <link rel="import" href="../../components/bounty-list/bounty-list.html">
+<link rel="import" href="../../components/bounty-bounty/bounty-bounty.html">
 
 <polymer-element name="bounty-app">
     <template>
-        <core-animated-pages selected="{{selected}}" transitions="slide-from-right">
+        <core-animated-pages selected="{{selected}}">
             <bounty-login name="login"></bounty-login>
             <bounty-list name="list" bounty="{{bounty}}" on-core-activate="{{bountySelect}}"></bounty-list>
+            <bounty-bounty name="bounty" bounty="{{bounty}}"></bounty-bounty>
         </core-animated-pages>
     </template>
 

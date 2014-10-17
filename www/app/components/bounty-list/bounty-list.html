@@ -7,7 +7,10 @@
         <core-selector target="{{$.list}}" selected="{{selected}}">
             <ul id="list">
                 <template repeat="{{bounty in bounties}}">
-                    <li>{{bounty.name}}</li>
+                    <li>
+                        <p hero-id="bounty" hero>{{bounty.name}}</p>
+                        <p>Value: {{bounty.value}}</p>
+                    </li>
                 </template>
             </ul>
         </core-selector>
