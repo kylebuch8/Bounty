@@ -1,0 +1,17 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+
+<polymer-element name="bounty-list" attributes="bounty">
+    <template>
+        <h1>Bounty List</h1>
+        <core-selector target="{{$.list}}" selected="{{selected}}">
+            <ul id="list">
+                <template repeat="{{bounty in bounties}}">
+                    <li>{{bounty.name}}</li>
+                </template>
+            </ul>
+        </core-selector>
+    </template>
+
+    <script src="bounty-list.js"></script>
+</polymer-element>

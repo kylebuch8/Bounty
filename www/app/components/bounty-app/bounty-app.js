@@ -1,9 +1,14 @@
 Polymer('bounty-app', {
-    selected: 'login',
+    //selected: (localStorage.getItem('access_token')) ? 'list' : 'login',
+    selected: 'list',
 
     ready: function () {
         this.addEventListener('logged-in', function () {
-            alert('logged in!');
+            this.selected = 'list';
         });
+    },
+
+    bountySelect: function () {
+        alert(this.bounty.name);
     }
 });
